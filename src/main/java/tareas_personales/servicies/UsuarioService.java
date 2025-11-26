@@ -1,5 +1,6 @@
 package tareas_personales.servicies;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import tareas_personales.entitys.Usuario;
 import tareas_personales.repositories.UsuarioRepository;
@@ -10,9 +11,11 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder passwordEncoder) {
         this.usuarioRepository= usuarioRepository;
+        this.passwordEncoder =  passwordEncoder;
     }
 
     public List<Usuario> ListUsersActives(){
@@ -24,6 +27,8 @@ public class UsuarioService {
     }
 
     public void saveUser(Usuario usuario){
+        String hashedPassword = passwordEncoder.encode(usuario.getPassword());
+        usuario.setPassword(hashedPassword);
         usuarioRepository.save(usuario);
     }
 

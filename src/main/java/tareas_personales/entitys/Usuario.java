@@ -22,5 +22,5 @@ public class Usuario {
     @Column(name="password",nullable = false)
     private String password;
     @Column()
-    private boolean Active = true;
+    private boolean active = true;
 }
