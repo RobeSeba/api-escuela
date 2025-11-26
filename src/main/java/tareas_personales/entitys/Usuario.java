@@ -2,6 +2,8 @@ package tareas_personales.entitys;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 @Data
@@ -20,5 +22,5 @@ public class Usuario {
     @Column(name="password",nullable = false)
     private String password;
     @Column()
-    private boolean isActive = true;
+    private boolean Active = true;
 }
